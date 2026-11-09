@@ -5,146 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore customer onboarding and support with Ordo et Cura, a fictional B2B platform.">
     <title>Ordo et Cura | Customer Onboarding Demo</title>
-    <style>
-        :root {
-            color-scheme: light;
-            --navy: #0a1a37;
-            --coral: #ff906d;
-            --paper: #faf7f2;
-            --muted: #4d586b;
-            --line: #ddd8d0;
-            font-family: system-ui, sans-serif;
-            color: var(--navy);
-            background: var(--paper);
-            line-height: 1.6;
-        }
-
-        * { box-sizing: border-box; }
-        body, h1, h2, p { margin: 0; }
-        a { color: inherit; }
-        a:focus-visible, summary:focus-visible {
-            outline: 3px solid #b54c30;
-            outline-offset: 5px;
-        }
-
-        .wrap {
-            width: min(100% - 2.5rem, 68rem);
-            margin-inline: auto;
-        }
-
-        header, .hero {
-            color: var(--paper);
-            background: var(--navy);
-        }
-
-        .header-inner {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: .75rem 2rem;
-            padding-block: 1.15rem;
-            border-bottom: 1px solid #34415a;
-        }
-
-        .brand { font-family: Georgia, serif; font-size: 1.4rem; }
-        header a { text-underline-offset: .3em; }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-            gap: clamp(1rem, 5vw, 5rem);
-            align-items: center;
-            padding-block: clamp(3rem, 8vw, 6rem);
-        }
-
-        .eyebrow {
-            font-size: .75rem;
-            font-weight: 750;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-        }
-
-        .hero .eyebrow { color: var(--coral); }
-
-        h1, h2 {
-            font-family: Georgia, serif;
-            font-weight: 400;
-            line-height: 1.08;
-        }
-
-        h1 {
-            font-size: clamp(2.6rem, 6vw, 5rem);
-            margin-block: .6rem 1.2rem;
-        }
-
-        .intro { max-width: 48ch; color: #d5ddea; }
-
-        .button {
-            display: inline-block;
-            margin-top: 1.65rem;
-            padding: .75rem 1.2rem;
-            border-radius: .5rem;
-            background: var(--coral);
-            color: var(--navy);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .button:hover { background: #ffab90; }
-        header a:focus-visible, .button:focus-visible { outline-color: var(--coral); }
-
-        .logo {
-            display: block;
-            width: min(100%, 22rem);
-            height: auto;
-            justify-self: center;
-            border-radius: 1.25rem;
-            border: 1px solid #34415a;
-        }
-
-        .questions {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
-            align-items: start;
-            gap: 2rem 3rem;
-            padding-block: clamp(3rem, 7vw, 5rem);
-        }
-
-        .questions .eyebrow { color: #983f2b; }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-block: .5rem .8rem; }
-        .questions p, footer { color: var(--muted); }
-
-        details {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: .7rem;
-        }
-
-        details + details { margin-top: .65rem; }
-
-        summary {
-            padding: 1rem 1.15rem;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        summary::marker { color: #983f2b; }
-        summary:hover { color: #983f2b; }
-        details p { padding: 0 1.15rem 1.15rem; }
-
-        footer {
-            border-top: 1px solid var(--line);
-            padding-block: 1.25rem;
-            font-size: .875rem;
-        }
-
-        @media (max-width: 44rem) {
-            .hero-inner, .questions { grid-template-columns: 1fr; }
-            .hero-inner { gap: 2rem; }
-            .logo { width: min(100%, 13rem); justify-self: start; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -163,7 +24,7 @@
                     <p class="eyebrow">Customer onboarding demo</p>
                     <h1 id="page-title">From kickoff to handover</h1>
                     <p class="intro">Ordo et Cura is a fictional platform that helps B2B teams and their customers coordinate onboarding tasks, responsibilities, and approvals in one shared project.</p>
-                    <a class="button" href="#questions">Explore example questions</a>
+                    <a class="button" href="workspace.html">Explore demo workspace</a>
                 </div>
                 <img class="logo" src="logo.png" alt="Ordo et Cura logo" width="1254" height="1254">
             </div>
