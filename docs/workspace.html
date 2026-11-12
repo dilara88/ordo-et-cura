@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore the Transitus demo workspace and see how approvals affect onboarding for Concordia Systems.">
+    <title>Transitus Workspace | Ordo et Cura</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="workspace.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="wrap header-inner">
+            <span class="brand">Ordo et Cura</span>
+            <nav aria-label="Main navigation">
+                <a href="index.html">Back to landing page</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="project-title">
+            <div class="wrap workspace-heading">
+                <p class="eyebrow">Demo workspace</p>
+                <h1 id="project-title">Transitus</h1>
+                <p class="intro">Follow Concordia Systems from kickoff through configuration and team training.</p>
+                <dl class="workspace-meta">
+                    <div><dt>Customer</dt><dd>Concordia Systems</dd></div>
+                    <div><dt>Project</dt><dd>P-B01</dd></div>
+                    <div><dt>Workspace plan</dt><dd>Growth</dd></div>
+                    <div><dt>Viewing as</dt><dd>Customer collaborator</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <div class="wrap workspace-content">
+            <section class="workspace-panel" aria-labelledby="checklist-title">
+                <h2 id="checklist-title">Project checklist</h2>
+                <ol class="task-list" role="list">
+                    <li>
+                        <div><strong>Kickoff</strong><p>Onboarding lead · Due <time datetime="2026-11-03">Nov 3</time></p></div>
+                        <span class="task-state" data-state="complete">Complete</span>
+                    </li>
+                    <li>
+                        <div><strong>Configuration</strong><p>Implementation lead · Due <time datetime="2026-11-06">Nov 6</time></p></div>
+                        <span class="task-state" data-state="complete">Complete</span>
+                    </li>
+                    <li>
+                        <div><strong>Configuration approval</strong><p>Concordia Systems project approver · Due <time datetime="2026-11-09">Nov 9</time></p></div>
+                        <span class="task-state" id="approval-state" data-state="pending">Pending</span>
+                    </li>
+                    <li>
+                        <div><strong>Team training</strong><p>Training lead · Due <time datetime="2026-11-12">Nov 12</time></p></div>
+                        <span class="task-state" id="training-state" data-state="blocked">Blocked</span>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="workspace-panel approval-panel" aria-labelledby="approval-title">
+                <p class="eyebrow">Training prerequisite</p>
+                <h2 id="approval-title">Configuration approval</h2>
+                <p id="approval-summary" role="status">Configuration is complete. Training is blocked until the Concordia Systems project approver signs off.</p>
+                <div id="simulation-controls" hidden>
+                    <p class="demo-note">Preview what happens after the assigned approver signs off. Refreshing restores the original scenario.</p>
+                    <button class="button" type="button" id="preview-approval">Preview after approval</button>
+                    <button class="button" type="button" id="reset-approval" hidden>Restore pending approval</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p class="wrap">Ordo et Cura is a fictional customer onboarding and support portfolio demo.</p>
+    </footer>
+</body>
+</html>
