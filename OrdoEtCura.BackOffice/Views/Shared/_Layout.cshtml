@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ordo et Cura Back Office</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+</head>
+<body>
+    <header>
+        <div class="wrap header-inner">
+            <a class="brand" asp-controller="BackOffice" asp-action="Index">Ordo et Cura Back Office</a>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button class="nav-button" type="submit">Sign out</button>
+                </form>
+            }
+        </div>
+    </header>
+    <main>@RenderBody()</main>
+    <footer><p class="wrap">Ordo et Cura Back Office</p></footer>
+</body>
+</html>

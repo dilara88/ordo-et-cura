@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="OrdoEtCura.Web.csproj" />
+  <Project Path="../OrdoEtCura.Data/OrdoEtCura.Data.csproj" />
+  <Project Path="../OrdoEtCura.BackOffice/OrdoEtCura.BackOffice.csproj" />
+</Solution>

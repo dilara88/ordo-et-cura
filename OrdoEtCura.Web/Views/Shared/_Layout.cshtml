@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] | Ordo et Cura</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+</head>
+<body>
+    <header>
+        <div class="wrap header-inner">
+            <a class="brand" asp-controller="Home" asp-action="Index">Ordo et Cura</a>
+            <nav class="app-nav" aria-label="Main navigation">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button class="nav-button" type="submit">Sign out</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login">Sign in</a>
+                }
+            </nav>
+        </div>
+    </header>
+    <main>@RenderBody()</main>
+    <footer><p class="wrap">Ordo et Cura is a fictional onboarding and support demo.</p></footer>
+</body>
+</html>
+

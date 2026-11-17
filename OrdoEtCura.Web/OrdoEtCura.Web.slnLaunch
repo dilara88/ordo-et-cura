@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Customer website and back office",
+    "Projects": [
+      {
+        "Path": "OrdoEtCura.Web.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\OrdoEtCura.BackOffice\\OrdoEtCura.BackOffice.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

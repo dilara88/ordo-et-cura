@@ -1,0 +1,44 @@
+@model WorkspaceView
+@{
+    ViewData["Title"] = Model.Project.Name;
+    var approved = Model.Project.ApprovedAt.HasValue;
+}
+<section class="hero">
+    <div class="wrap workspace-heading">
+        <p class="eyebrow">Customer workspace</p>
+        <h1>@Model.Project.Name</h1>
+        <dl class="workspace-meta">
+            <div><dt>Customer</dt><dd>@Model.Project.Company</dd></div>
+            <div><dt>Project</dt><dd>@Model.Project.Id</dd></div>
+            <div><dt>Plan</dt><dd>@Model.Project.Plan</dd></div>
+        </dl>
+    </div>
+</section>
+<div class="wrap workspace-content">
+    <section class="workspace-panel">
+        <h2>Project checklist</h2>
+        <ol class="task-list" role="list">
+            <li><strong>Kickoff</strong><span class="task-state" data-state="complete">Complete</span></li>
+            <li><strong>Configuration</strong><span class="task-state" data-state="complete">Complete</span></li>
+            <li><strong>Configuration approval</strong><span class="task-state" data-state="@(approved ? "complete" : "pending")">@(approved ? "Approved" : "Pending")</span></li>
+            <li><strong>Team training</strong><span class="task-state" data-state="@(approved ? "ready" : "blocked")">@(approved ? "Ready to start" : "Blocked")</span></li>
+        </ol>
+    </section>
+    <section class="workspace-panel approval-panel">
+        <h2>Configuration approval</h2>
+        @if (approved)
+        {
+            <p>The assigned approver has signed off. Team training can start.</p>
+        }
+        else
+        {
+            <p>Training is blocked until the assigned approver signs off on configuration.</p>
+            @if (Model.CanApprove)
+            {
+                <form asp-action="Approve" method="post">
+                    <button class="button" type="submit">Approve configuration</button>
+                </form>
+            }
+        }
+    </section>
+</div>
