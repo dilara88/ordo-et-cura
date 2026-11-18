@@ -7,6 +7,7 @@ namespace OrdoEtCura.Web.Models;
 public sealed class DemoUser : IdentityUser
 {
     public string Company { get; set; } = "";
+    public bool IsActive { get; set; } = true;
 }
 
 public sealed class OnboardingProject
@@ -19,9 +20,19 @@ public sealed class OnboardingProject
     public DateTimeOffset? ApprovedAt { get; set; }
 }
 
+public sealed class ProjectEvent
+{
+    public int Id { get; set; }
+    public string ProjectId { get; set; } = "";
+    public DateTimeOffset OccurredAt { get; set; } = DateTimeOffset.UtcNow;
+    public string Actor { get; set; } = "";
+    public string Description { get; set; } = "";
+}
+
 public sealed class DemoDb(DbContextOptions<DemoDb> options) : IdentityDbContext<DemoUser>(options)
 {
     public DbSet<OnboardingProject> Projects => Set<OnboardingProject>();
+    public DbSet<ProjectEvent> ProjectEvents => Set<ProjectEvent>();
 }
 
 public static class DemoRoles

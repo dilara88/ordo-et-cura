@@ -36,9 +36,32 @@
             @if (Model.CanApprove)
             {
                 <form asp-action="Approve" method="post">
+                    <input name="id" type="hidden" value="@Model.Project.Id">
                     <button class="button" type="submit">Approve configuration</button>
                 </form>
             }
         }
     </section>
 </div>
+
+<section class="wrap app-section">
+    <h2>Your workspaces</h2>
+    @foreach (var project in Model.Projects)
+    {
+        <a class="button" asp-action="Index" asp-route-id="@project.Id">@project.Name</a>
+    }
+    <details>
+        <summary>Explore the onboarding steps</summary>
+        <p>Kickoff aligns the teams. Configuration prepares the service. The assigned approver reviews configuration before the training lead can begin training.</p>
+    </details>
+    <details>
+        <summary>Project activity</summary>
+        @if (Model.History.Count == 0) { <p>No approval events have been recorded yet.</p> }
+        <ul>
+        @foreach (var entry in Model.History)
+        {
+            <li>@entry.OccurredAt.ToString("u") · @entry.Description</li>
+        }
+        </ul>
+    </details>
+</section>

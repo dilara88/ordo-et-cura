@@ -21,6 +21,7 @@ public static class DemoSetup
             (Name: "collaborator", Company: Customer, Role: DemoRoles.Collaborator),
             (Name: "approver", Company: Customer, Role: DemoRoles.Approver),
             (Name: "outsider", Company: "Aster", Role: DemoRoles.Collaborator),
+            (Name: "aster-approver", Company: "Aster", Role: DemoRoles.Approver),
             (Name: "admin", Company: "Ordo et Cura", Role: DemoRoles.Admin)
         };
 
@@ -42,10 +43,22 @@ public static class DemoSetup
 
                 user = new DemoUser { UserName = email, Email = email, Company = account.Company };
                 RequireSuccess(await users.CreateAsync(user, password));
+                RequireSuccess(await users.AddToRoleAsync(user, account.Role));
             }
 
-            if (!await users.IsInRoleAsync(user, account.Role))
-                RequireSuccess(await users.AddToRoleAsync(user, account.Role));
+
+        }
+
+
+        if (!await db.Projects.AnyAsync(project => project.Id == "P-A01"))
+        {
+            db.Projects.Add(new OnboardingProject
+            {
+                Id = "P-A01", Name = "Aster Launch", Company = "Aster", Plan = "Core",
+                ApproverId = (await users.FindByNameAsync("aster-approver@demo.example"))!.Id, ApprovedAt = null
+            });
+            db.ProjectEvents.Add(new ProjectEvent { ProjectId = "P-A01", Actor = "System", Description = "Project created with configuration complete and approval pending." });
+            await db.SaveChangesAsync();
         }
 
         if (!await db.Projects.AnyAsync(project => project.Id == ProjectId))
@@ -56,6 +69,7 @@ public static class DemoSetup
                 Id = ProjectId, Name = "Transitus", Company = Customer, Plan = "Growth",
                 ApproverId = approver!.Id
             });
+            db.ProjectEvents.Add(new ProjectEvent { ProjectId = ProjectId, Actor = "System", Description = "Project created with configuration complete and approval pending." });
             await db.SaveChangesAsync();
         }
     }

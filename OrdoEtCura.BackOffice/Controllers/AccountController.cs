@@ -20,7 +20,7 @@ public sealed class AccountController(SignInManager<DemoUser> signIn, UserManage
             return View(input);
 
         var user = await users.FindByNameAsync(input.Email);
-        var canSignIn = user is not null && await users.IsInRoleAsync(user, DemoRoles.Admin);
+        var canSignIn = user is not null && user.IsActive && await users.IsInRoleAsync(user, DemoRoles.Admin);
         var result = canSignIn
             ? await signIn.PasswordSignInAsync(user!, input.Password, false, lockoutOnFailure: true)
             : Microsoft.AspNetCore.Identity.SignInResult.Failed;
@@ -41,4 +41,3 @@ public sealed class AccountController(SignInManager<DemoUser> signIn, UserManage
 
     public IActionResult Denied() => StatusCode(StatusCodes.Status403Forbidden, "You do not have access to this area.");
 }
-

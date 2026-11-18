@@ -13,6 +13,8 @@
             <nav class="app-nav" aria-label="Main navigation">
                 @if (User.Identity?.IsAuthenticated == true)
                 {
+                    <a asp-controller="Workspace" asp-action="Index">My workspaces</a>
+                    <span>@User.Identity.Name</span>
                     <form asp-controller="Account" asp-action="Logout" method="post">
                         <button class="nav-button" type="submit">Sign out</button>
                     </form>
@@ -28,4 +30,3 @@
     <footer><p class="wrap">Ordo et Cura is a fictional onboarding and support demo.</p></footer>
 </body>
 </html>
-

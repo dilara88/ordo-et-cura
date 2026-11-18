@@ -1,0 +1,39 @@
+@model ProjectDetails
+<section class="wrap app-section">
+    <a asp-action="Index">Back to projects</a>
+    <h1>@Model.Project.Name</h1>
+    <p role="status">@TempData["Notice"]</p>
+    <div class="workspace-panel data-panel">
+        <dl>
+            <dt>Project</dt><dd>@Model.Project.Id</dd>
+            <dt>Company</dt><dd>@Model.Project.Company</dd>
+            <dt>Plan</dt><dd>@Model.Project.Plan</dd>
+            <dt>Configuration</dt><dd>Complete</dd>
+            <dt>Approval</dt><dd>@(Model.Project.ApprovedAt.HasValue ? "Approved" : "Pending")</dd>
+            <dt>Training</dt><dd>@(Model.Project.ApprovedAt.HasValue ? "Ready to start" : "Blocked")</dd>
+        </dl>
+        <form asp-action="AssignApprover" method="post" class="login-form">
+            <input name="id" type="hidden" value="@Model.Project.Id">
+            <label for="approver">Assigned approver</label>
+            <select id="approver" name="approverId" required>
+                <option value="">Select an active company approver</option>
+                @foreach (var approver in Model.Approvers)
+                {
+                    <option value="@approver.Id" selected="@(approver.Id == Model.Project.ApproverId)">@approver.Email</option>
+                }
+            </select>
+            <p>Changing the approver returns configuration approval to Pending and blocks training.</p>
+            <button class="button" type="submit">Save approver</button>
+        </form>
+    </div>
+    <div class="workspace-panel data-panel">
+        <h2>Approval history</h2>
+        @if (Model.History.Count == 0) { <p>No approval events have been recorded yet.</p> }
+        <ul>
+        @foreach (var entry in Model.History)
+        {
+            <li><time>@entry.OccurredAt.ToString("u")</time> · @entry.Actor · @entry.Description</li>
+        }
+        </ul>
+    </div>
+</section>

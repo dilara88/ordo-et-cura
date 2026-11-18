@@ -224,3 +224,8 @@ footer {
 .data-panel { overflow-x: auto; margin-top: 1rem; }
 .data-panel table { width: 100%; border-collapse: collapse; }
 .data-panel th, .data-panel td { padding: .65rem; text-align: left; border-bottom: 1px solid var(--line); }
+
+.login-form select { font: inherit; padding: .55rem; border: 1px solid var(--muted); border-radius: .35rem; width: 100%; }
+.app-section h1 { margin-bottom: 1rem; }
+.data-panel td form { margin-top: .5rem; }
+.data-panel button { font: inherit; cursor: pointer; padding: .3rem .65rem; }

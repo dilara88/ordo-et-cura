@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<SecurityStampValidatorOptions>(options => options.ValidationInterval = TimeSpan.Zero);
 var connection = builder.Configuration.GetConnectionString("OrdoEtCura")
     ?? throw new InvalidOperationException("Configure the OrdoEtCura SQL Server connection.");
 builder.Services.AddDbContext<DemoDb>(options => options.UseSqlServer(connection));
@@ -68,5 +69,3 @@ if (args.Contains("--initialize-demo", StringComparer.Ordinal))
 }
 
 app.Run();
-
-

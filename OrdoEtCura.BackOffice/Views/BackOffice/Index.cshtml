@@ -1,14 +1,26 @@
 @model BackOfficeView
 <section class="wrap app-section">
     <h1>Ordo et Cura Back Office</h1>
+    <p role="status">@TempData["Notice"]</p>
+    <a class="button" asp-action="UserDetails">Create user</a>
     <div class="workspace-panel data-panel">
-        <h2>Test accounts</h2>
+        <h2>Users</h2>
         <table>
-            <thead><tr><th scope="col">Email</th><th scope="col">Company</th><th scope="col">Role</th></tr></thead>
+            <thead><tr><th>Email</th><th>Company</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
             @foreach (var account in Model.Accounts)
             {
-                <tr><td>@account.Email</td><td>@account.Company</td><td>@account.Role</td></tr>
+                <tr>
+                    <td>@account.Email</td><td>@account.Company</td><td>@account.Role</td>
+                    <td>@(account.Active ? "Active" : "Inactive")</td>
+                    <td>
+                        <a asp-action="UserDetails" asp-route-id="@account.Id">Edit membership and role</a>
+                        <form asp-action="ToggleActive" method="post">
+                            <input type="hidden" name="id" value="@account.Id">
+                            <button type="submit">@(account.Active ? "Deactivate" : "Reactivate")</button>
+                        </form>
+                    </td>
+                </tr>
             }
             </tbody>
         </table>
@@ -16,11 +28,12 @@
     <div class="workspace-panel data-panel">
         <h2>Projects</h2>
         <table>
-            <thead><tr><th scope="col">Workspace</th><th scope="col">Company</th><th scope="col">Plan</th><th scope="col">Approver</th><th scope="col">Approval</th></tr></thead>
+            <thead><tr><th>Workspace</th><th>Company</th><th>Plan</th><th>Approval</th></tr></thead>
             <tbody>
             @foreach (var project in Model.Projects)
             {
-                <tr><td>@project.Workspace</td><td>@project.Company</td><td>@project.Plan</td><td>@project.Approver</td><td>@(project.ApprovedAt.HasValue ? "Approved" : "Pending")</td></tr>
+                <tr><td><a asp-action="Project" asp-route-id="@project.Id">@project.Name</a></td>
+                    <td>@project.Company</td><td>@project.Plan</td><td>@(project.ApprovedAt.HasValue ? "Approved" : "Pending")</td></tr>
             }
             </tbody>
         </table>

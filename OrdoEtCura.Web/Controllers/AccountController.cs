@@ -17,14 +17,14 @@ public sealed class AccountController(SignInManager<DemoUser> signIn, UserManage
             return View(input);
 
         var user = await users.FindByNameAsync(input.Email);
-        var canSignIn = user is not null &&
+        var canSignIn = user is not null && user.IsActive &&
             (await users.IsInRoleAsync(user, DemoRoles.Collaborator) ||
              await users.IsInRoleAsync(user, DemoRoles.Approver));
         var result = canSignIn
             ? await signIn.PasswordSignInAsync(user!, input.Password, false, lockoutOnFailure: true)
             : Microsoft.AspNetCore.Identity.SignInResult.Failed;
         if (result.Succeeded)
-            return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) : RedirectToAction("Index", "Home");
+            return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) : RedirectToAction("Index", "Workspace");
 
         ModelState.AddModelError("", "Sign-in failed. Check your email and password or try again later.");
         return View(input);
@@ -40,4 +40,3 @@ public sealed class AccountController(SignInManager<DemoUser> signIn, UserManage
 
     public IActionResult Denied() => StatusCode(StatusCodes.Status403Forbidden, "You do not have access to this area.");
 }
-

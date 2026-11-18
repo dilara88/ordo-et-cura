@@ -6,6 +6,7 @@ using OrdoEtCura.Web.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<SecurityStampValidatorOptions>(options => options.ValidationInterval = TimeSpan.Zero);
 var connection = builder.Configuration.GetConnectionString("OrdoEtCura")
     ?? throw new InvalidOperationException("Configure the OrdoEtCura SQL Server connection.");
 builder.Services.AddDbContext<DemoDb>(options => options.UseSqlServer(connection));

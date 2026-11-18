@@ -1,0 +1,23 @@
+@model ManagedUserInput
+<section class="wrap app-section">
+    <a asp-action="Index">Back to users</a>
+    <div class="workspace-panel login-panel">
+        <h1>@(Model.Id is null ? "Create user" : "Edit user")</h1>
+        <form asp-action="SaveUser" method="post" class="login-form">
+            <div asp-validation-summary="All" role="alert"></div>
+            <input asp-for="Id" type="hidden">
+            <label asp-for="Email"></label><input asp-for="Email" required>
+            <label asp-for="Company"></label><input asp-for="Company" required>
+            <label asp-for="Role"></label>
+            <select asp-for="Role">
+                <option>Collaborator</option><option>Approver</option><option>Admin</option>
+            </select>
+            @if (Model.Id is null)
+            {
+                <label asp-for="Password">Initial password</label>
+                <input asp-for="Password" autocomplete="new-password" required>
+            }
+            <button class="button" type="submit">Save user</button>
+        </form>
+    </div>
+</section>
